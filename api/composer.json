@@ -7,16 +7,21 @@
         "api-platform/api-pack": "^1.1",
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
+        "sensio/framework-extra-bundle": "^5.5",
+        "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "5.0.*",
         "symfony/mercure-bundle": "^0.2",
+        "symfony/swiftmailer-bundle": "^3.4",
+        "symfony/twig-pack": "^1.0",
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",
-        "symfony/maker-bundle": "^1.11",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "symfony/maker-bundle": "^1.19",
         "symfony/profiler-pack": "^1.0"
     },
     "conflict": {
