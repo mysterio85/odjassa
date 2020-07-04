@@ -3,16 +3,16 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\StatusRepository;
+use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass=StatusRepository::class)
+ * @ORM\Entity(repositoryClass=PictureRepository::class)
  */
-class Status
+class Picture
 {
     /**
      * @ORM\Id()
@@ -27,12 +27,7 @@ class Status
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="status")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="pictures")
      */
     private $products;
 
@@ -58,18 +53,6 @@ class Status
         return $this;
     }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Product[]
      */
@@ -82,7 +65,7 @@ class Status
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setStatus($this);
+            $product->addPicture($this);
         }
 
         return $this;
@@ -92,10 +75,7 @@ class Status
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
-            // set the owning side to null (unless already changed)
-            if ($product->getStatus() === $this) {
-                $product->setStatus(null);
-            }
+            $product->removePicture($this);
         }
 
         return $this;
